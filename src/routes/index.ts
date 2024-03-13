@@ -4,8 +4,8 @@
  */
 
 import express, {Request, Response} from 'express'
-import HelloRouter from '@/routes/HelloRouter'
-import { LogInfo } from '@/utils/logger'
+import HelloRouter from '../routes/HelloRouter'
+import { LogInfo } from '../utils/logger'
 
 // Server instance
 

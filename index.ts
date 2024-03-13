@@ -1,25 +1,20 @@
-import express, { type Express, type Request, type Response } from 'express'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import server from './src/server';
+import { LogSuccess, LogError } from './src/utils/logger';
 
-// Configuration the .env file
+// * Configuration the .env file
+dotenv.config();
 
-dotenv.config()
+const port = process.env.PORT || 8000;
 
-// Create Express App
-const app: Express = express()
-const port = process.env.PORT || 8000
+// * Excecute SERVER
 
-// Define the firts Route of APP
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to my first API with TypeScript and Express!')
-})
+server.listen(port, () => {
+  LogSuccess(`Server is running on http://localhost:${port}`);
+});
 
-// Define the firts Route of APP
-app.get('/hello', (req: Request, res: Response) => {
-  res.send('Hello World!')
-})
+// * Control SERVER ERROR
 
-// Execute APP and List Request to PORT
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
-})
+server.on ('error', (error) => {
+  LogError(`Server error: ${error}`);
+});
